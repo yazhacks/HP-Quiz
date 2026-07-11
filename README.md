@@ -1,1 +1,1 @@
-# House-Quiz
+# HP-Quiz

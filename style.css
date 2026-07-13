@@ -3,6 +3,7 @@
     max-width: 900px;
     margin: 0 auto;
     padding: 16px;
+    display: none;
 }
 
 .quiz-container .timer {
@@ -16,9 +17,54 @@
 
 .quiz-container h2.question {
     font-size: 20px;
-    background-color: #7df1a0;
+    background-color: rgba(139, 36, 36, 0.247);
+    color: #ffffff;
     padding: 16px;
     border-radius: 8px;
     font-weight: normal;
     line-height: 1.6;
+}
+
+.quiz-container .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.quiz-container .option {
+    border: none;
+    padding: 24px 32px;
+    font-size: 18px;
+    background: #1d3557;
+    background: #fff;
+}
+
+.quiz-container .button {
+    cursor: pointer;
+}
+
+.disabled {
+    pointer-events: none;
+}
+
+.option.correct {
+    background: rgba(115, 253, 145, 0.733)n;
+    color: #222;
+    }
+
+.option.incorrect {
+    background: #f85562;
+}
+
+.quiz-container .next-button {
+    background: #222;
+    color:#fff;
+    border: none;
+    padding: 12px 32px;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 3px;
+
 }

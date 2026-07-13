@@ -1,9 +1,8 @@
 .quiz-container {
-    font-family:"Roboto", sans-serif;
-    max-width: 900px;
     margin: 0 auto;
+    font-family: "Roboto", sans-serif;
+    max-width: 900px;
     padding: 16px;
-    display: none;
 }
 
 .quiz-container .timer {
@@ -57,7 +56,8 @@
     background: #f85562;
 }
 
-.quiz-container .next-button {
+.quiz-container .next-button,
+.quiz-result .retake-button {
     background: #222;
     color:#fff;
     border: none;
@@ -66,5 +66,28 @@
     text-transform: uppercase;
     font-weight: bold;
     letter-spacing: 3px;
+    width: fit-content;
+}
 
+.quiz-result {
+    display: none;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: "Roboto", sans-serif;
+    padding: 16px;
+}
+
+.quiz-result .question-container {
+    padding: 12px;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.quiz-result .question-container.incorrect {
+    background: #e63946;
+    color: #fff;
 }

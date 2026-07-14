@@ -44,13 +44,13 @@ const quizResult = document.querySelector('.quiz-result');
 const retakeButton = document.querySelector('.retake-button');
 
 let questionNumber = 0;
-const MAX_Questions = quizData.length;
+const MAX_Questions = 7;
 
 const shuffleArray = (array) => array.slice().sort(() => Math.random() - 0.5);
 
 const createQuestion = () => {
     optionsContainer.innerHTML = "";
-    questionText.textContent = quizData[questionNumber].question;
+    questionText.innerHTML = `<span class='question-number'>${questionNumber + 1}/${MAX_Questions} </span> ${quizData[questionNumber].question}`;
 
     const shuffledOptions = shuffleArray(quizData[questionNumber].options);
 

@@ -16,9 +16,9 @@
 
 .quiz-container h2.question {
     font-size: 20px;
-    background-color: rgba(139, 36, 36, 0.247);
-    opacity: 1.0;
-    color: #00000000;
+    background-color: rgb(133, 34, 34);
+    opacity: 4.0;
+    color: #fff;
     padding: 16px;
     border-radius: 8px;
     font-weight: normal;
@@ -36,8 +36,10 @@
     border: none;
     padding: 24px 32px;
     font-size: 18px;
-    background: #1d3557;
-    background: #fff;
+    background: #41203b;
+    color: #fff;
+    border-radius: 8px;
+    cursor: pointer;
 }
 
 .quiz-container .button {
@@ -91,4 +93,9 @@
 .quiz-result .question-container.incorrect {
     background: #e63946;
     color: #fff;
+}
+
+.question-number {
+    font-size: 16px;
+    margin-right: 16spx;
 }

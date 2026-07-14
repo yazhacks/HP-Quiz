@@ -17,7 +17,8 @@
 .quiz-container h2.question {
     font-size: 20px;
     background-color: rgba(139, 36, 36, 0.247);
-    color: #ffffff;
+    opacity: 1.0;
+    color: #00000000;
     padding: 16px;
     border-radius: 8px;
     font-weight: normal;
@@ -48,9 +49,9 @@
 }
 
 .option.correct {
-    background: rgba(115, 253, 145, 0.733)n;
+    background: rgba(115, 253, 145, 0.733);
     color: #222;
-    }
+}
 
 .option.incorrect {
     background: #f85562;

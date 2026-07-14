@@ -37,32 +37,60 @@ let quizData = [
 ];
 
 const quizContainer = document.querySelector('.quiz-container');
-const question = document.querySelector('.quiz-container .question');
-const options = document.querySelectorAll('.quiz-container .option');
+const questionText = document.querySelector('.quiz-container .question');
+const optionsContainer = document.querySelector('.quiz-container .options');
 const nextButton = document.querySelector('.quiz-container .next-button');
+const quizResult = document.querySelector('.quiz-result');
+const retakeButton = document.querySelector('.retake-button');
 
 let questionNumber = 0;
+const MAX_Questions = quizData.length;
 
-const shuffleArray = (array) => {
-    return array.slice().sort(() => Math.random() - 0.5);
-}
-
-// quizData=shuffleArray(quizData); 
+const shuffleArray = (array) => array.slice().sort(() => Math.random() - 0.5);
 
 const createQuestion = () => {
-    question.innerHTML = quizData[questionNumber].question;
+    optionsContainer.innerHTML = "";
+    questionText.textContent = quizData[questionNumber].question;
 
     const shuffledOptions = shuffleArray(quizData[questionNumber].options);
 
-    quizData[questionNumber].options.forEach((o) => {
+    shuffledOptions.forEach((o) => {
         const option = document.createElement('button');
         option.classList.add('option');
-        option.innerHTML = o;
+        option.textContent = o;
         optionsContainer.appendChild(option);
     });
 }
 
+const displayQuizResult = () => {
+    quizResult.style.display = 'flex';
+    quizContainer.style.display = 'none';
+}
+
+const displayNextQuestion = () => {
+    if (questionNumber >= MAX_Questions - 1) {
+        displayQuizResult();
+        return;
+    }
+
+    questionNumber++;
+    createQuestion();
+}
+
+const resetQuiz = () => {
+    questionNumber = 0;
+    quizResult.style.display = 'none';
+    quizContainer.style.display = '';
+    createQuestion();
+}
+
 createQuestion();
+nextButton.addEventListener('click', displayNextQuestion);
+retakeButton.addEventListener('click', resetQuiz); 
+
+
+
+
 
 
 

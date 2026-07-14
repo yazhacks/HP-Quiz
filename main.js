@@ -22,10 +22,10 @@ let quizData = [
     {
         question: "Who betrays Dumbledore's Army in Order of the Phoenix?",
         options: ["Severus Snape", "Cho Chang", "Marrietta Edgecombe", "Justin Finch-Fletchley"],
-        correctAnswer: "Marietta Edgecombe"
+        correctAnswer: "Marrietta Edgecombe"
     },
     {
-        question: "What is the name of Tom Riddle's mother?",
+        question: "What is the name of Voldemort's mother?",
         options: ["Bathilda Bagshot", "Merope Gaunt", "Hepzibah Smith", "Dolores Umbridge"],
         correctAnswer: "Merope Gaunt"
     },
@@ -44,28 +44,53 @@ const quizResult = document.querySelector('.quiz-result');
 const retakeButton = document.querySelector('.retake-button');
 
 let questionNumber = 0;
-const MAX_Questions = 7;
+let score = 0;
+const MAX_Questions = quizData.length;
 
 const shuffleArray = (array) => array.slice().sort(() => Math.random() - 0.5);
 
+quizData = shuffleArray(quizData);
+
+const checkAnswer = (event) => {
+    const selected = event.target.textContent;
+    const correct = quizData[questionNumber].correctAnswer;
+
+    if (selected === correct) {
+        score++;
+        event.target.classList.add('correct');
+    } else {
+        event.target.classList.add('incorrect');
+    }
+
+    let allOptions = document.querySelectorAll(".quiz-container .option");
+    allOptions.forEach((o) => {
+        o.classList.add("disabled");
+    });
+};
+
 const createQuestion = () => {
     optionsContainer.innerHTML = "";
-    questionText.innerHTML = `<span class='question-number'>${questionNumber + 1}/${MAX_Questions} </span> ${quizData[questionNumber].question}`;
+    questionText.innerHTML = `<span class='question-number'>${questionNumber + 1}/${MAX_Questions}</span> ${quizData[questionNumber].question}`;
 
     const shuffledOptions = shuffleArray(quizData[questionNumber].options);
 
-    shuffledOptions.forEach((o) => {
+    shuffledOptions.forEach((optionText) => {
         const option = document.createElement('button');
         option.classList.add('option');
-        option.textContent = o;
+        option.textContent = optionText;
+        option.addEventListener('click', checkAnswer);
         optionsContainer.appendChild(option);
     });
-}
+};
 
 const displayQuizResult = () => {
     quizResult.style.display = 'flex';
     quizContainer.style.display = 'none';
-}
+    const scoreHeading = quizResult.querySelector('h2');
+    if (scoreHeading) {
+        scoreHeading.textContent = `You have scored ${score} out of ${MAX_Questions}.`;
+    }
+};
 
 const displayNextQuestion = () => {
     if (questionNumber >= MAX_Questions - 1) {
@@ -75,18 +100,19 @@ const displayNextQuestion = () => {
 
     questionNumber++;
     createQuestion();
-}
+};
 
 const resetQuiz = () => {
     questionNumber = 0;
+    score = 0;
     quizResult.style.display = 'none';
     quizContainer.style.display = '';
     createQuestion();
-}
+};
 
 createQuestion();
 nextButton.addEventListener('click', displayNextQuestion);
-retakeButton.addEventListener('click', resetQuiz); 
+retakeButton.addEventListener('click', resetQuiz);
 
 
 

@@ -16,7 +16,7 @@
 
 .quiz-container h2.question {
     font-size: 20px;
-    background-color: rgb(133, 34, 34);
+    background-color: #184b92;
     opacity: 4.0;
     color: #fff;
     padding: 16px;
@@ -36,8 +36,8 @@
     border: none;
     padding: 24px 32px;
     font-size: 18px;
-    background: #41203b;
-    color: #fff;
+    background: #a9dbfc;
+    color: #000;
     border-radius: 8px;
     cursor: pointer;
 }
@@ -96,6 +96,11 @@
 }
 
 .question-number {
+    display: inline-block;
     font-size: 16px;
-    margin-right: 16spx;
+    margin-right: 16px;
+    background: #a9dbfc;
+    color: #000;
+    padding: 8px;
+    border-radius: 8px;
 }

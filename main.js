@@ -39,27 +39,28 @@ function checkAnswer(e) {
 }
 
 function renderQuestion() {
-    clearInterval(timerInterval);
+  clearInterval(timerInterval);
 
-   let secondsleft= 9;
-   const timerDisplay = document.querySelector('.quiz-container .timer');
-   timerDisplay.classList.remove("danger");
+  let secondsLeft = 10;
+  const timerDisplay = document.querySelector('.quiz-container .timer');
+  timerDisplay.classList.remove('danger');
+  timerDisplay.textContent = `Time left: ${secondsLeft} seconds`;
 
-   timerDisplay.textContent = `Time left: 10 seconds`;
+  timerInterval = setInterval(() => {
+    secondsLeft--;
+    if (secondsLeft <= 0) {
+      timerDisplay.textContent = `Time left: 0 seconds`;
+      timerDisplay.classList.add('danger');
+      clearInterval(timerInterval);
+      nextQuestion();
+      return;
+    }
 
-   timerInterval = setInterval(() => {
-     secondsleft--;
-     timerDisplay.textContent = `Time left: ${secondsleft} seconds`;
-
-if (secondsleft < 3) {
-     timerDisplay.classList.add('danger');
-   }
-
-     if (secondsleft < 0) {
-       clearInterval(timerInterval);
-       displayNextQuestion();
-     }
-   }, 1000);
+    timerDisplay.textContent = `Time left: ${secondsLeft.toString().padStart(2,0)} seconds`;
+    if (secondsLeft < 3) {
+      timerDisplay.classList.add('danger');
+    }
+  }, 1000);
 
   if (!questionText || !optionsContainer) return;
   optionsContainer.innerHTML = '';
@@ -80,6 +81,7 @@ function createQuestion() {
 }
 
 function showResults() {
+  clearInterval(timerInterval);
   if (!quizResult || !quizContainer) return;
   quizContainer.style.display = 'none';
   quizResult.style.display = 'flex';
@@ -116,6 +118,7 @@ function nextQuestion() {
 }
 
 function resetQuiz() {
+  clearInterval(timerInterval);
   questionIndex = 0;
   score = 0;
   try { for (let i=0;i<TOTAL;i++) localStorage.removeItem(`userAnswer_${i}`); } catch(_){ }

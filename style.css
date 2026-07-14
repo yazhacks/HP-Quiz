@@ -16,8 +16,7 @@
 
 .quiz-container h2.question {
     font-size: 20px;
-    background-color: #184b92;
-    opacity: 4.0;
+    background-color: #152f85d3;
     color: #fff;
     padding: 16px;
     border-radius: 8px;
@@ -103,4 +102,11 @@
     color: #000;
     padding: 8px;
     border-radius: 8px;
+}
+
+
+@media (max-width: 768px) {
+    .quiz-container .options {
+        grid-template-columns: 1fr;
+    }
 }

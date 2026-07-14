@@ -17,6 +17,7 @@ const quizResult = document.querySelector('.quiz-result');
 let questionIndex = 0;
 let score = 0;
 const TOTAL = quizData.length;
+let timerInterval;
 
 const shuffleArray = (array) => array.slice().sort(() => Math.random() - 0.5);
 
@@ -38,6 +39,28 @@ function checkAnswer(e) {
 }
 
 function renderQuestion() {
+    clearInterval(timerInterval);
+
+   let secondsleft= 9;
+   const timerDisplay = document.querySelector('.quiz-container .timer');
+   timerDisplay.classList.remove("danger");
+
+   timerDisplay.textContent = `Time left: 10 seconds`;
+
+   timerInterval = setInterval(() => {
+     secondsleft--;
+     timerDisplay.textContent = `Time left: ${secondsleft} seconds`;
+
+if (secondsleft < 3) {
+     timerDisplay.classList.add('danger');
+   }
+
+     if (secondsleft < 0) {
+       clearInterval(timerInterval);
+       displayNextQuestion();
+     }
+   }, 1000);
+
   if (!questionText || !optionsContainer) return;
   optionsContainer.innerHTML = '';
   questionText.innerHTML = `<span class=\"question-number\">${questionIndex + 1}/${TOTAL}</span><span class=\"question-text\">${quizData[questionIndex].question}</span>`;
@@ -49,6 +72,11 @@ function renderQuestion() {
     btn.addEventListener('click', checkAnswer);
     optionsContainer.appendChild(btn);
   });
+}
+
+// Compatibility wrapper: some older code expects `createQuestion()`
+function createQuestion() {
+  renderQuestion();
 }
 
 function showResults() {
